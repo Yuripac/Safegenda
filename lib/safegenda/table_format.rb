@@ -13,7 +13,7 @@ module Safegenda
 
       row =  "|  #{activity + blank_space_a}"
       row << "|  #{time     + blank_space_t}|\n"
-      row << "|#{'-' * (row.length - 3)}|\n"    
+      row << "|#{'-' * (row.length - 3)}|\n"
     end
 
   end
