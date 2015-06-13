@@ -7,7 +7,7 @@ module Safegenda
       max_space  = 24
       space_a = (max_space - activity.length)
       space_t = (max_space - time.length)
-      
+
       blank_space_a = " " * space_a
       blank_space_t = " " * space_t
 
@@ -15,6 +15,6 @@ module Safegenda
       row << "|  #{time     + blank_space_t}|\n"
       row << "|#{'-' * (row.length - 3)}|\n"    
     end
-  
+
   end
 end
