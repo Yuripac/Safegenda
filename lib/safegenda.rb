@@ -8,18 +8,18 @@ module Safegenda
     DEFAULT_TIME = "NONE"
 
     attr_accessor :directory, :name
-    
+
     def initialize(locals = {})
       default_locals = {
         name:       DEFAULT_NAME,
         directory:  DEFAULT_DIR
       }
       locals = default_locals.merge(locals)
-      
+
       @directory = locals[:directory]
       @file_name = locals[:name]
 
-      init_file if File.zero?(file_agenda)
+      init_safegenda_file if File.zero?(file_agenda) || !File.exist?(file_agenda)
     end
 
     def add_activity(activity, time = nil)
@@ -35,7 +35,7 @@ module Safegenda
     end
 
     def remove_all_activity
-      init_file
+      init_safegenda_file
     end
 
     def file_agenda
@@ -44,7 +44,7 @@ module Safegenda
 
     private
 
-    def init_file
+    def init_safegenda_file
       File.open(file_agenda, 'w') do |file|
         file << TableFormat.create_row("ATIVIDADE", "HORARIO")
       end
