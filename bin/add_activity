@@ -1,7 +1,0 @@
-#!/user/bin/env ruby
-require 'safegenda'
-
-activity, time = ARGV 
-agenda = Safegenda::Agenda.new
-
-agenda.add_activity(activity, time)

@@ -1,6 +1,0 @@
-#!user/bin/env ruby
-require 'safegenda'
-
-agenda = Safegenda::Agenda.new
-
-agenda.remove_all_activity
