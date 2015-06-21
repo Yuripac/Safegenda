@@ -3,7 +3,7 @@ module Safegenda
 
     require 'safegenda'
 
-    WHITE_LIST = %(add_activity remove_all_activity)
+    WHITE_LIST = %(add_activity remove_all_activity remove_activity)
 
     def self.run_command(argv)
       command = argv.shift
@@ -12,7 +12,7 @@ module Safegenda
       if WHITE_LIST.include?(command)
         Agenda.new.send(command, *params)
       else
-        puts "Command not exists"
+        $stderr.puts "Command not exists"
       end
     end
 
