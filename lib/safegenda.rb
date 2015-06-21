@@ -30,8 +30,12 @@ module Safegenda
       end
     end
 
+    # looks for the activity and then removes the row.
     def remove_activity(activity)
-      # looks for the activity and then removes the row.
+      file_text = []
+
+      read {|row| file_text << row if row !~ /#{activity}/}
+      write(file_text)
     end
 
     def remove_all_activity
@@ -42,12 +46,30 @@ module Safegenda
       @directory + @file_name
     end
 
+    # reads all the rows
+    def read
+      File.open(file_agenda) do |file|
+        if block_given?
+          file.each {|row| yield row}
+        else
+          file.map {|row| row}
+        end
+      end
+    end
+
+    # overrides the text with a new text
+    def write(text)
+      File.open(file_agenda, 'w') do |file|
+        text.each {|row| file << row}
+      end
+    end
+
     private
 
+    # create a new file
     def init_safegenda_file
-      File.open(file_agenda, 'w') do |file|
-        file << TableFormat.create_row("ATIVIDADE", "HORARIO")
-      end
+      text = [TableFormat.create_row("ATIVIDADE", "HORARIO")]
+      write(text)
     end
 
   end
