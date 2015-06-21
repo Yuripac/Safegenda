@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = "safegenda"
-  spec.version =  "0.0.5"
+  spec.version =  "1.0.0"
   spec.authors =  ["Yuri Matheus"]
   spec.description = "Add a new activity in your agenda."
   spec.email =  ["yuri_dias_@hotmail.com"]
