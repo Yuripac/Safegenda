@@ -1,12 +1,13 @@
 module Safegenda
   class TableFormat
 
+    MAX_SPACE = 18
+
     def self.create_row(activity, time = nil)
       time = time || DEFAULT_TIME
 
-      max_space  = 24
-      space_a = (max_space - activity.length)
-      space_t = (max_space - time.length)
+      space_a = MAX_SPACE - activity.length
+      space_t = MAX_SPACE - time.length
 
       blank_space_a = " " * space_a
       blank_space_t = " " * space_t
@@ -14,6 +15,22 @@ module Safegenda
       row =  "|  #{activity + blank_space_a}"
       row << "|  #{time     + blank_space_t}|\n"
       row << "|#{'-' * (row.length - 3)}|\n"
+    end
+
+    # it takes the params and creates a header for the table.
+    def self.create_header(*words)
+      row_aux = '|'
+      words.each do |word|
+        blank_space = " " * (MAX_SPACE - word.length)
+        row_aux << "  #{word + blank_space}|"
+      end
+      row_aux << "\n"
+      row_div = "|#{'-' * (row_aux.chomp.length - 2)}|\n"
+
+      row = ""
+      row << row_div
+      row << row_aux
+      row << row_div
     end
 
   end
