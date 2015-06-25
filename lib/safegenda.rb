@@ -68,7 +68,7 @@ module Safegenda
 
     # create a new file
     def init_safegenda_file
-      text = [TableFormat.create_row("ATIVIDADE", "HORARIO")]
+      text = [TableFormat.create_header("ATIVIDADE", "HORARIO")]
       write(text)
     end
 
