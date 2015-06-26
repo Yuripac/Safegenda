@@ -3,7 +3,7 @@ module Safegenda
 
     require 'safegenda'
 
-    WHITE_LIST = %(add_activity remove_all_activity remove_activity)
+    WHITE_LIST = %(add remove_all remove)
 
     def self.run_command(argv)
       command = argv.shift
