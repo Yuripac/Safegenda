@@ -22,8 +22,10 @@ module Safegenda
       init_safegenda_file if File.zero?(file_agenda) || !File.exist?(file_agenda)
     end
 
-    def add_activity(activity, time = nil)
+    def add(activity, time = nil)
       time = time || DEFAULT_TIME
+
+      delete_last_line
 
       File.open(file_agenda, 'a') do |file|
         file << TableFormat.create_row(activity, time)
@@ -31,14 +33,14 @@ module Safegenda
     end
 
     # looks for the activity and then removes the row.
-    def remove_activity(activity)
+    def remove(activity)
       file_text = []
 
-      read {|row| file_text << row if row !~ /#{activity}/}
+      readlines {|row| file_text << row if row !~ /#{activity}/}
       write(file_text)
     end
 
-    def remove_all_activity
+    def remove_all
       init_safegenda_file
     end
 
@@ -47,7 +49,7 @@ module Safegenda
     end
 
     # reads all the rows
-    def read
+    def readlines
       File.open(file_agenda) do |file|
         if block_given?
           file.each {|row| yield row}
@@ -68,9 +70,14 @@ module Safegenda
 
     # create a new file
     def init_safegenda_file
-      text = [TableFormat.create_header("ATIVIDADE", "HORARIO")]
+      text = [TableFormat.create_table("ATIVIDADE", "HORARIO")]
       write(text)
     end
 
+    def delete_last_line
+      lines = readlines
+      lines.pop
+      write(lines)
+    end
   end
 end
