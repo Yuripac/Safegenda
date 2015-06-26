@@ -18,7 +18,7 @@ module Safegenda
     end
 
     # it takes the params and creates a header for the table.
-    def self.create_header(*words)
+    def self.create_table(*words)
       row_aux = '|'
       words.each do |word|
         blank_space = " " * (MAX_SPACE - word.length)
@@ -30,6 +30,7 @@ module Safegenda
       row = ""
       row << row_div
       row << row_aux
+      row << row_div
       row << row_div
     end
 
