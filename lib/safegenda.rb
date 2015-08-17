@@ -48,7 +48,7 @@ module Safegenda
       @directory + @file_name
     end
 
-    # reads all the rows
+    # reads all rows
     def readlines
       File.open(file_agenda) do |file|
         if block_given?
